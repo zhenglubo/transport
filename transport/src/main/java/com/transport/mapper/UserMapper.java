@@ -12,4 +12,8 @@ import java.util.List;
 public interface UserMapper {
 
     List<User> selectAll();
+
+    User selectByPrimaryKey(Long id);
+
+    int selectCount();
 }

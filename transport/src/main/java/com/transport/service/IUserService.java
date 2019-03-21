@@ -1,5 +1,7 @@
 package com.transport.service;
 
+import com.transport.common.ListResponse;
+import com.transport.common.RequestParam;
 import com.transport.domain.User;
 
 import java.util.List;
@@ -9,5 +11,7 @@ import java.util.List;
  */
 public interface IUserService {
 
-    List<User> selectAll();
+    ListResponse<List<User>> selectAll(RequestParam param);
+
+    User selectByPrimaryKey(Long id);
 }

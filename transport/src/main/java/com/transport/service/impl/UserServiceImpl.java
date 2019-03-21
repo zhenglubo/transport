@@ -1,5 +1,9 @@
 package com.transport.service.impl;
 
+import com.transport.common.ListResponse;
+import com.transport.common.Pagination;
+import com.transport.common.RequestParam;
+import com.transport.common.Response;
 import com.transport.domain.User;
 import com.transport.mapper.UserMapper;
 import com.transport.service.IUserService;
@@ -18,7 +22,14 @@ public class UserServiceImpl implements IUserService {
     private UserMapper userMapper;
 
     @Override
-    public List<User> selectAll() {
-        return userMapper.selectAll();
+    public ListResponse<List<User>> selectAll(RequestParam param) {
+        List<User> userList = userMapper.selectAll();
+        int total = userMapper.selectCount();
+        return new ListResponse(userList,total,param.getBasePagination());
+    }
+
+    @Override
+    public User selectByPrimaryKey(Long id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 }
