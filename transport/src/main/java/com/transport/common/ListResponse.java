@@ -2,6 +2,8 @@ package com.transport.common;
 
 import java.util.List;
 
+
+
 public class ListResponse<T> {
     private List<T> data;
     private Pagination pagination;
