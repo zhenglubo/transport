@@ -6,6 +6,7 @@ import com.transport.common.result.DataResult;
 import com.transport.common.result.DataResultBuild;
 import com.transport.domain.TransportOrder;
 import com.transport.dto.OrderListSearchDto;
+import com.transport.dto.OrderUpdateDto;
 import com.transport.service.ITransportOrderService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,13 @@ public class TransportOrderController {
     @ApiOperation(value = "分页查询")
     @PostMapping("/listSearch")
     public DataResult<IPage<TransportOrder>> listSearch(@RequestBody OrderListSearchDto orderListSearchDto) {
-        IPage<TransportOrder> orders = orderService.listSearch(orderListSearchDto);
-        return CollectionUtils.isEmpty(orders.getRecords()) ? DataResultBuild.fail("no data") : DataResultBuild.success(orders);
+        return orderService.listSearch(orderListSearchDto);
+    }
+
+    @ApiOperation("更新")
+    @PostMapping("/update")
+    public DataResult<Boolean> update(@RequestBody OrderUpdateDto updateDto){
+        return orderService.updateOrder(updateDto);
     }
 }
 

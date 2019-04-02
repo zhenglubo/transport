@@ -1,11 +1,14 @@
 package com.transport.common.result;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * @description: 结果集
  * @author: zhenglubo
  * @create: 2019-03-30 09:56
  **/
 
+@EqualsAndHashCode
 public class DataResult<T> {
 
     private Integer status;
@@ -76,85 +79,6 @@ public class DataResult<T> {
 
     public void setData(final T data) {
         this.data = data;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (o == this) {
-            return true;
-        } else if (!(o instanceof DataResult)) {
-            return false;
-        } else {
-            DataResult<?> other = (DataResult)o;
-            if (!other.canEqual(this)) {
-                return false;
-            } else {
-                label59: {
-                    Object this$status = this.getStatus();
-                    Object other$status = other.getStatus();
-                    if (this$status == null) {
-                        if (other$status == null) {
-                            break label59;
-                        }
-                    } else if (this$status.equals(other$status)) {
-                        break label59;
-                    }
-
-                    return false;
-                }
-
-                Object this$info = this.getInfo();
-                Object other$info = other.getInfo();
-                if (this$info == null) {
-                    if (other$info != null) {
-                        return false;
-                    }
-                } else if (!this$info.equals(other$info)) {
-                    return false;
-                }
-
-                Object this$message = this.getMessage();
-                Object other$message = other.getMessage();
-                if (this$message == null) {
-                    if (other$message != null) {
-                        return false;
-                    }
-                } else if (!this$message.equals(other$message)) {
-                    return false;
-                }
-
-                Object this$data = this.getData();
-                Object other$data = other.getData();
-                if (this$data == null) {
-                    if (other$data != null) {
-                        return false;
-                    }
-                } else if (!this$data.equals(other$data)) {
-                    return false;
-                }
-
-                return true;
-            }
-        }
-    }
-
-    protected boolean canEqual(final Object other) {
-        return other instanceof DataResult;
-    }
-
-    @Override
-    public int hashCode() {
-        boolean PRIME = true;
-        int result = 1;
-        Object $status = this.getStatus();
-        result = result * 59 + ($status == null ? 43 : $status.hashCode());
-        Object $info = this.getInfo();
-        result = result * 59 + ($info == null ? 43 : $info.hashCode());
-        Object $message = this.getMessage();
-        result = result * 59 + ($message == null ? 43 : $message.hashCode());
-        Object $data = this.getData();
-        result = result * 59 + ($data == null ? 43 : $data.hashCode());
-        return result;
     }
 
     @Override

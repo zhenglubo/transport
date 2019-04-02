@@ -25,13 +25,16 @@ public class User extends Model {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户名")
+    @ApiModelProperty(value = "主键ID")
+    private Long id;
+
+    @ApiModelProperty(value = "用户名",position = 1)
     private String username;
 
-    @ApiModelProperty(value = "密码")
+    @ApiModelProperty(value = "密码",position = 2)
     private String password;
 
-    @ApiModelProperty(value = "联系电话")
+    @ApiModelProperty(value = "联系电话",position = 3)
     private String contactPhone;
 
 

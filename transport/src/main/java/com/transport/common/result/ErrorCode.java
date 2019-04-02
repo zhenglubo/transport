@@ -4,9 +4,10 @@ package com.transport.common.result;
  * 返回码
  * @author Administrator
  */
+@SuppressWarnings("all")
 public enum ErrorCode {
 
-    SUCCESS_CODE(0, "Success"),
+    SUCCESS_CODE(200, "Success"),
     FAIL_CODE(1, "Fail"),
     BAD_REQUEST(400, "Bad Request"),
     NOT_AUTHORIZATION(401, "NotAuthorization"),
@@ -28,6 +29,7 @@ public enum ErrorCode {
     ERROR_VERSION(2000, "Version Error"),
     ERROR_FORMAT_PARAMETER(2001, "Parameter Format Error");
 
+
     private Integer code;
     private String msg;
 
@@ -39,7 +41,7 @@ public enum ErrorCode {
         return this.msg;
     }
 
-    private ErrorCode(final Integer code, final String msg) {
+    ErrorCode(final Integer code, final String msg) {
         this.code = code;
         this.msg = msg;
     }

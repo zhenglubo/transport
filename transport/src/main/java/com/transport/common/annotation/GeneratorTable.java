@@ -12,4 +12,5 @@ import java.lang.annotation.Target;
 public @interface GeneratorTable {
 
     String name();
+    boolean isCondition() default true;
 }

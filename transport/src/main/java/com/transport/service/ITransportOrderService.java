@@ -1,9 +1,11 @@
 package com.transport.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.transport.common.result.DataResult;
 import com.transport.domain.TransportOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.transport.dto.OrderListSearchDto;
+import com.transport.dto.OrderUpdateDto;
 
 /**
  * <p>
@@ -20,5 +22,12 @@ public interface ITransportOrderService extends IService<TransportOrder> {
      * @param orderListSearchDto
      * @return
      */
-    IPage<TransportOrder> listSearch(OrderListSearchDto orderListSearchDto);
+    DataResult<IPage<TransportOrder>> listSearch(OrderListSearchDto orderListSearchDto);
+
+    /**
+     * 更新订单
+     * @param updateDto
+     * @return
+     */
+    DataResult<Boolean> updateOrder(OrderUpdateDto updateDto);
 }

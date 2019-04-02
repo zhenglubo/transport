@@ -1,8 +1,11 @@
 package com.transport.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.transport.common.result.DataResult;
 import com.transport.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.transport.dto.UserListQueryDto;
+import com.transport.dto.UserUpdateDto;
 
 import java.util.List;
 
@@ -18,7 +21,15 @@ public interface IUserService extends IService<User> {
 
     /**
      * list search
+     * @param userListQueryDto
      * @return
      */
-    DataResult<List<User>> listSearch();
+    DataResult<IPage<User>> listSearch(UserListQueryDto userListQueryDto);
+
+    /**
+     * update user info
+     * @param dto
+     * @return
+     */
+    DataResult<Boolean> updateUserInfo(UserUpdateDto dto);
 }
