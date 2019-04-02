@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.transport.common.result.DataResult;
 import com.transport.common.result.DataResultBuild;
 import com.transport.common.utils.DMLSQLWrapper;
-import com.transport.common.utils.MapUtils;
 import com.transport.domain.TransportOrder;
 import com.transport.dto.OrderListSearchDto;
 import com.transport.dto.OrderUpdateDto;
@@ -17,10 +16,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * <p>

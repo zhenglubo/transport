@@ -4,12 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.transport.common.annotation.GeneratorTable;
 import lombok.extern.slf4j.Slf4j;
-import sun.rmi.runtime.Log;
 
 import java.lang.reflect.Field;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @description: DML sql Wrapper
@@ -24,18 +20,29 @@ public class DMLSQLWrapper<T> {
 
     public static <T> QueryWrapper<T> queryWrapper(Object object, Class<T> tClass) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-        Map<String, Object> map = MapUtils.toMap(object);
-        Set<Map.Entry<String, Object>> entrySet = map.entrySet();
-        Iterator<Map.Entry<String, Object>> iterator = entrySet.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, Object> entry = iterator.next();
-            queryWrapper.eq(entry.getKey(), entry.getValue());
+        Field[] fields = object.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            String fieldName = field.getName();
+            try {
+                Object value = field.get(object);
+                if(value !=null && !"current".equalsIgnoreCase(fieldName) && !"size".equalsIgnoreCase(fieldName)){
+                    GeneratorTable annotation = field.getAnnotation(GeneratorTable.class);
+                    if(annotation !=null && annotation.isCondition()){
+                        setCompareType(queryWrapper,annotation,value);
+                    }
+                }
+            }catch (Exception e){
+                log.error(DMLSQLWrapper.class.getSimpleName(),e.getMessage());
+            }
         }
         return queryWrapper;
     }
 
+
+
     /**
      * 更新语句封装对象
+     *
      * @param object
      * @param tClass
      * @param <T>
@@ -54,7 +61,7 @@ public class DMLSQLWrapper<T> {
                     if (annotation != null) {
                         String columnName = annotation.name();
                         if (annotation.isCondition()) {
-                            wrapper.eq(columnName, value);
+                            setCompareType(wrapper,annotation,value);
                         } else {
                             wrapper.set(columnName, value);
                         }
@@ -65,5 +72,47 @@ public class DMLSQLWrapper<T> {
             }
         }
         return wrapper;
+    }
+
+    private static <T> void setCompareType(UpdateWrapper<T> wrapper, GeneratorTable annotation, Object value) {
+        String columnName = annotation.name();
+        switch (annotation.compareType()){
+            case 0://等于，默认
+                wrapper.eq(columnName, value);
+                break;
+            case 1://大于等于
+                wrapper.ge(true, columnName, value);
+                break;
+            case 2://大于
+                wrapper.ge(false, columnName, value);
+                break;
+            case -1://小于等于
+                wrapper.le(true, columnName, value);
+                break;
+            case -2://小于
+                wrapper.le(false, columnName, value);
+                break;
+        }
+    }
+
+    private static <T> void setCompareType(QueryWrapper<T> wrapper,GeneratorTable annotation,Object value ){
+        String columnName = annotation.name();
+        switch (annotation.compareType()){
+            case 0://等于，默认
+                wrapper.eq(columnName, value);
+                break;
+            case 1://大于等于
+                wrapper.ge(true, columnName, value);
+                break;
+            case 2://大于
+                wrapper.ge(false, columnName, value);
+                break;
+            case -1://小于等于
+                wrapper.le(true, columnName, value);
+                break;
+            case -2://小于
+                wrapper.le(false, columnName, value);
+                break;
+        }
     }
 }
