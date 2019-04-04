@@ -25,7 +25,7 @@ public class DMLSQLWrapper<T> {
             String fieldName = field.getName();
             try {
                 Object value = field.get(object);
-                if(value !=null && !"current".equalsIgnoreCase(fieldName) && !"size".equalsIgnoreCase(fieldName)){
+                if(value !=null){
                     GeneratorTable annotation = field.getAnnotation(GeneratorTable.class);
                     if(annotation !=null && annotation.isCondition()){
                         setCompareType(queryWrapper,annotation,value);
@@ -56,7 +56,7 @@ public class DMLSQLWrapper<T> {
             String fieldName = field.getName();
             try {
                 Object value = field.get(object);
-                if (value != null && !"current".equalsIgnoreCase(fieldName) && !"size".equalsIgnoreCase(fieldName)) {
+                if (value != null) {
                     GeneratorTable annotation = field.getAnnotation(GeneratorTable.class);
                     if (annotation != null) {
                         String columnName = annotation.name();

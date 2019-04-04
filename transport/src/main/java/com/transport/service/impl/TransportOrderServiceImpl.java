@@ -34,7 +34,7 @@ public class TransportOrderServiceImpl extends ServiceImpl<TransportOrderMapper,
     @Override
     public DataResult<IPage<TransportOrder>> listSearch(OrderListSearchDto orderListSearchDto) {
         QueryWrapper<TransportOrder> wrapper = DMLSQLWrapper.queryWrapper(orderListSearchDto, TransportOrder.class);
-        IPage<TransportOrder> orderIPage = transportOrderMapper.selectPage(new Page<>(orderListSearchDto.getCurrent(), orderListSearchDto.getSize(), true), wrapper);
+        IPage<TransportOrder> orderIPage = transportOrderMapper.selectPage(new Page<>(orderListSearchDto.getCurrent(), orderListSearchDto.getPageSize(), true), wrapper);
         return CollectionUtils.isEmpty(orderIPage.getRecords()) ? DataResultBuild.fail("no data") : DataResultBuild.success(orderIPage);
     }
 

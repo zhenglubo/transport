@@ -15,9 +15,9 @@ import java.io.Serializable;
 
 @Data
 @ApiModel(value="OrderListSearchDto", description="列表查询请求dto")
-public class OrderListSearchDto implements Serializable {
+public class OrderListSearchDto extends Page implements Serializable {
 
-    @GeneratorTable(name="id")
+    /*@GeneratorTable(name="id")
     @ApiModelProperty(value = "主键ID",position = 1,example = "1")
     private Long id;
 
@@ -41,6 +41,6 @@ public class OrderListSearchDto implements Serializable {
     private Integer current;
 
     @ApiModelProperty(value = "每一页大小",position = 7,example = "10")
-    private Integer size;
+    private Integer pageSize;*/
 
 }
