@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.transport.mapper.FleetManagementMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.transport.domain.FleetManagement">
+    <result column="id" property="id" />
+        <result column="transport_company_id" property="transportCompanyId" />
+        <result column="start_address" property="startAddress" />
+        <result column="destinition_address" property="destinitionAddress" />
+        <result column="license" property="license" />
+        <result column="length" property="length" />
+        <result column="main_driver_name" property="mainDriverName" />
+        <result column="main_driver_phone" property="mainDriverPhone" />
+        <result column="main_driver_license" property="mainDriverLicense" />
+        <result column="second_driver_phone" property="secondDriverPhone" />
+        <result column="second_driver_license" property="secondDriverLicense" />
+        <result column="carrying_capacity" property="carryingCapacity" />
+        <result column="status" property="status" />
+        <result column="is_valid" property="isValid" />
+        <result column="data_chang_createt_time" property="dataChangCreatetTime" />
+        <result column="data_chang_last_time" property="dataChangLastTime" />
+    </resultMap>
+
+</mapper>
