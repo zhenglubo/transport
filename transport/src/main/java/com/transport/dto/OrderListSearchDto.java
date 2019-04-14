@@ -17,7 +17,7 @@ import java.io.Serializable;
 @ApiModel(value="OrderListSearchDto", description="列表查询请求dto")
 public class OrderListSearchDto extends Page implements Serializable {
 
-    /*@GeneratorTable(name="id")
+    @GeneratorTable(name="id")
     @ApiModelProperty(value = "主键ID",position = 1,example = "1")
     private Long id;
 
@@ -37,10 +37,5 @@ public class OrderListSearchDto extends Page implements Serializable {
     @ApiModelProperty(value = "运费付款方式（0：发货方付，1：收货方付）",position = 5,example = "0")
     private String transportPayType;
 
-    @ApiModelProperty(value = "当前页",position = 6,example = "0")
-    private Integer current;
-
-    @ApiModelProperty(value = "每一页大小",position = 7,example = "10")
-    private Integer pageSize;*/
 
 }

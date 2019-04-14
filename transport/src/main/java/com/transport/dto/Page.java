@@ -17,12 +17,9 @@ import javax.validation.constraints.NotNull;
 public class Page {
 
     @ApiModelProperty(name = "pageSize",example = "10",required = true)
-    //@NotNull(message = "pageSize is null")
+    @NotNull(message = "pageSize is null")
     private int pageSize = 10;
     @ApiModelProperty(name = "当前页",example = "0",required = true)
-    //@NotNull(message = "current is null")
+    @NotNull(message = "current is null")
     private int current = 1;
-    @ApiModelProperty(name = "总条数",example = "20")
-    private int total;
-
 }

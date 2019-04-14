@@ -22,22 +22,22 @@ public class DMLSQLWrapper<T> {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         Field[] fields = object.getClass().getDeclaredFields();
         for (Field field : fields) {
+            field.setAccessible(true);
             String fieldName = field.getName();
             try {
                 Object value = field.get(object);
-                if(value !=null){
+                if (value != null) {
                     GeneratorTable annotation = field.getAnnotation(GeneratorTable.class);
-                    if(annotation !=null && annotation.isCondition()){
-                        setCompareType(queryWrapper,annotation,value);
+                    if (annotation != null && annotation.isCondition()) {
+                        setCompareType(queryWrapper, annotation, value);
                     }
                 }
-            }catch (Exception e){
-                log.error(DMLSQLWrapper.class.getSimpleName(),e.getMessage());
+            } catch (Exception e) {
+                log.error(DMLSQLWrapper.class.getSimpleName(), e.getMessage());
             }
         }
         return queryWrapper;
     }
-
 
 
     /**
@@ -61,7 +61,7 @@ public class DMLSQLWrapper<T> {
                     if (annotation != null) {
                         String columnName = annotation.name();
                         if (annotation.isCondition()) {
-                            setCompareType(wrapper,annotation,value);
+                            setCompareType(wrapper, annotation, value);
                         } else {
                             wrapper.set(columnName, value);
                         }
@@ -76,10 +76,7 @@ public class DMLSQLWrapper<T> {
 
     private static <T> void setCompareType(UpdateWrapper<T> wrapper, GeneratorTable annotation, Object value) {
         String columnName = annotation.name();
-        switch (annotation.compareType()){
-            case 0://等于，默认
-                wrapper.eq(columnName, value);
-                break;
+        switch (annotation.compareType()) {
             case 1://大于等于
                 wrapper.ge(true, columnName, value);
                 break;
@@ -92,15 +89,15 @@ public class DMLSQLWrapper<T> {
             case -2://小于
                 wrapper.le(false, columnName, value);
                 break;
+            case 0:
+                default:wrapper.eq(columnName, value);
         }
     }
 
-    private static <T> void setCompareType(QueryWrapper<T> wrapper,GeneratorTable annotation,Object value ){
+    private static <T> void setCompareType(QueryWrapper<T> wrapper, GeneratorTable annotation, Object value) {
         String columnName = annotation.name();
-        switch (annotation.compareType()){
-            case 0://等于，默认
-                wrapper.eq(columnName, value);
-                break;
+        switch (annotation.compareType()) {
+
             case 1://大于等于
                 wrapper.ge(true, columnName, value);
                 break;
@@ -113,6 +110,8 @@ public class DMLSQLWrapper<T> {
             case -2://小于
                 wrapper.le(false, columnName, value);
                 break;
+            case 0://等于，默认
+                default:wrapper.eq(columnName, value);
         }
     }
 }
