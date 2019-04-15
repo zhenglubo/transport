@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public DataResult<String> runtimeExceptionHandler(RuntimeException ex) {
-        return result(ErrorCode.RUNTIME_EXCEPTION.getCode(), ex);
+        return result(ErrorCode.RUNTIME_EXCEPTION, ex);
     }
 
     /**
@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public DataResult<String> nullPointerExceptionHandler(NullPointerException ex) {
-        return result(ErrorCode.NULL_POINTER_EXCEPTION.getCode(), ex);
+        return result(ErrorCode.NULL_POINTER_EXCEPTION, ex);
     }
 
     /**
@@ -66,7 +66,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ClassCastException.class)
     @ResponseBody
     public DataResult<String> classCastExceptionHandler(ClassCastException ex) {
-        return result(ErrorCode.CLASS_CAST_EXCEPTION.getCode(), ex);
+        return result(ErrorCode.CLASS_CAST_EXCEPTION, ex);
     }
 
     /**
@@ -78,7 +78,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IOException.class)
     @ResponseBody
     public DataResult<String> ioExceptionHandler(IOException ex) {
-        return result(ErrorCode.IO_EXCEPTION.getCode(), ex);
+        return result(ErrorCode.IO_EXCEPTION, ex);
     }
 
     /**
@@ -90,7 +90,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchMethodException.class)
     @ResponseBody
     public DataResult<String> noSuchMethodExceptionHandler(NoSuchMethodException ex) {
-        return result(ErrorCode.NO_SUCH_METHOD_EXCEPTION.getCode(), ex);
+        return result(ErrorCode.NO_SUCH_METHOD_EXCEPTION, ex);
     }
 
     /**
@@ -102,7 +102,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IndexOutOfBoundsException.class)
     @ResponseBody
     public DataResult<String> indexOutOfBoundsExceptionHandler(IndexOutOfBoundsException ex) {
-        return result(ErrorCode.INDEX_OUT_OF_BOUNDS_EXCEPTION.getCode(), ex);
+        return result(ErrorCode.INDEX_OUT_OF_BOUNDS_EXCEPTION, ex);
     }
 
     /**
@@ -114,7 +114,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConnectException.class)
     @ResponseBody
     public DataResult<String> connectException(ConnectException ex) {
-        return result(ErrorCode.CONNECT_EXCEPTION.getCode(), ex);
+        return result(ErrorCode.CONNECT_EXCEPTION, ex);
     }
 
     /**
@@ -126,7 +126,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({HttpMessageNotReadableException.class})
     @ResponseBody
     public DataResult<String> requestNotReadable(HttpMessageNotReadableException ex) {
-        return result(ErrorCode.BAD_REQUEST.getCode(), ex);
+        return result(ErrorCode.BAD_REQUEST, ex);
     }
 
     /**
@@ -138,7 +138,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({TypeMismatchException.class})
     @ResponseBody
     public DataResult<String> requestTypeMismatch(TypeMismatchException ex) {
-        return result(ErrorCode.BAD_REQUEST.getCode(), ex);
+        return result(ErrorCode.BAD_REQUEST, ex);
     }
 
     /**
@@ -150,13 +150,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({MissingServletRequestParameterException.class})
     @ResponseBody
     public DataResult<String> requestMissingServletRequest(MissingServletRequestParameterException ex) {
-        return result(ErrorCode.BAD_REQUEST.getCode(), ex);
+        return result(ErrorCode.BAD_REQUEST, ex);
     }
 
     @ExceptionHandler({ServletException.class})
     @ResponseBody
     public DataResult<String> http404(ServletException ex) {
-        return result(ErrorCode.NOT_FOUND_REQUEST.getCode(), ex);
+        return result(ErrorCode.NOT_FOUND_REQUEST, ex);
     }
 
     /**
@@ -168,7 +168,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     @ResponseBody
     public DataResult<String> request405(HttpRequestMethodNotSupportedException ex) {
-        return result(ErrorCode.METHOD_NOT_ALLOWED.getCode(), ex);
+        return result(ErrorCode.METHOD_NOT_ALLOWED, ex);
     }
 
     /**
@@ -180,7 +180,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({HttpMediaTypeNotAcceptableException.class})
     @ResponseBody
     public DataResult<String> request406(HttpMediaTypeNotAcceptableException ex) {
-        return result(ErrorCode.NOT_ACCEPTABLE.getCode(), ex);
+        return result(ErrorCode.NOT_ACCEPTABLE, ex);
     }
 
     /**
@@ -192,7 +192,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({ConversionNotSupportedException.class, HttpMessageNotWritableException.class})
     @ResponseBody
     public DataResult<String> server500(RuntimeException runtimeException) {
-        return result(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), runtimeException);
+        return result(ErrorCode.INTERNAL_SERVER_ERROR, runtimeException);
     }
 
     /**
@@ -211,7 +211,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({JsonMappingException.class})
     @ResponseBody
     public DataResult<String> jsonMappingException(JsonMappingException jsonMappingException) {
-        return result(ErrorCode.ERROR_FORMAT_PARAMETER.getCode(), jsonMappingException);
+        return result(ErrorCode.ERROR_FORMAT_PARAMETER, jsonMappingException);
     }
 
     /**
@@ -229,6 +229,11 @@ public class GlobalExceptionHandler {
         } else {
             return new DataResult<String>().fail(errCode, e.getError(), e.getMessage());
         }
+    }
+
+    private DataResult<String> result(ErrorCode errorCode,Exception e){
+        log.error(e.getMessage(), e);
+        return new DataResult<String>().fail(errorCode.getCode(),errorCode.getMsg(),e.getMessage());
     }
 
     private DataResult<String> result(int errCode, Exception e) {
