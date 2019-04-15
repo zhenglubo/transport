@@ -1,6 +1,8 @@
 package com.transport.domain;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -40,6 +42,10 @@ public class Sender extends Model {
     @ApiModelProperty(value = "发货人电话")
     private String senderPhone;
 
+    @ApiModelProperty(value = "发货人提货地址")
+    private String senderAddress;
+
+    @ApiModelProperty(value = "银行卡号")
     private String bankCardNo;
 
     @ApiModelProperty(value = "银行卡类型")
@@ -48,9 +54,11 @@ public class Sender extends Model {
     @ApiModelProperty(value = "持卡人")
     private String cardholder;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime dataChangeCreateTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @ApiModelProperty(value = "修改时间")
     private LocalDateTime dataChangeLastTime;
 

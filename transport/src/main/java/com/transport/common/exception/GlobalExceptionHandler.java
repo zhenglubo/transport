@@ -29,7 +29,7 @@ import java.net.ConnectException;
  * @create: 2019-04-11 16:01
  **/
 
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);

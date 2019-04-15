@@ -72,6 +72,7 @@ public class OrdersDetail extends Model {
     @ApiModelProperty(value = "发货日期")
     private LocalDate sendDate;
 
+    @ApiModelProperty(value = "收货日期")
     private LocalDate reciveDate;
 
     @ApiModelProperty(value = "是否损坏(0:未损坏 1损坏)")

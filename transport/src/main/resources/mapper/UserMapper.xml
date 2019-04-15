@@ -5,9 +5,13 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.transport.domain.User">
     <result column="id" property="id" />
+        <result column="transport_company_id" property="transportCompanyId" />
         <result column="username" property="username" />
         <result column="password" property="password" />
+        <result column="real_name" property="realName" />
         <result column="contact_phone" property="contactPhone" />
+        <result column="user_role_id" property="userRoleId" />
+        <result column="user_state" property="userState" />
     </resultMap>
 
 </mapper>
