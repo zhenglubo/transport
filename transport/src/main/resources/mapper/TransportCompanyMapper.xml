@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.transport.mapper.TransportCompanyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.transport.domain.TransportCompany">
+    <result column="id" property="id" />
+        <result column="company_name" property="companyName" />
+        <result column="company_phone" property="companyPhone" />
+        <result column="company_phone_name" property="companyPhoneName" />
+        <result column="company_tel_first" property="companyTelFirst" />
+        <result column="company_tel_second" property="companyTelSecond" />
+        <result column="begin_receive_time" property="beginReceiveTime" />
+        <result column="end_receive_time" property="endReceiveTime" />
+        <result column="settle_time_describle" property="settleTimeDescrible" />
+        <result column="begin_operation_date" property="beginOperationDate" />
+        <result column="stop_operation_date" property="stopOperationDate" />
+        <result column="data_change_create_time" property="dataChangeCreateTime" />
+        <result column="data_change_last_time" property="dataChangeLastTime" />
+    </resultMap>
+
+</mapper>

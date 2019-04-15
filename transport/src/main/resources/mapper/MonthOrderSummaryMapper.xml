@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.transport.mapper.MonthOrderSummaryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.transport.domain.MonthOrderSummary">
+    <result column="id" property="id" />
+        <result column="transport_company_id" property="transportCompanyId" />
+        <result column="total_order" property="totalOrder" />
+        <result column="processing_number" property="processingNumber" />
+        <result column="processed_number" property="processedNumber" />
+        <result column="unprocess_number" property="unprocessNumber" />
+        <result column="return_number" property="returnNumber" />
+        <result column="province_number" property="provinceNumber" />
+        <result column="province" property="province" />
+        <result column="city_number" property="cityNumber" />
+        <result column="city" property="city" />
+        <result column="damageed_number" property="damageedNumber" />
+        <result column="summary_month" property="summaryMonth" />
+        <result column="data_change_create_time" property="dataChangeCreateTime" />
+        <result column="data_change_last_time" property="dataChangeLastTime" />
+    </resultMap>
+
+</mapper>
