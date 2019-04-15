@@ -2,10 +2,8 @@ package com.transport.common.exception;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.transport.common.result.DataResult;
-import com.transport.common.result.DataResultBuild;
 import com.transport.common.result.ErrorCode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -18,136 +16,224 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.ConnectException;
 
-/**
- * @description: 全局异常控制类
- * @author: zhenglubo
- * @create: 2019-04-11 16:01
- **/
 
-//@ControllerAdvice
+
+/**全局异常控制类
+ * @author zlb
+ */
+@ControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    @Resource
+    private LocaleUtil localeUtil;
 
-    @ResponseBody
-    @ExceptionHandler(value = GlobalException.class)
-    public DataResult hanlerException(HttpServletRequest request, GlobalException e){
-        return DataResultBuild.fail(e.getMessage());
-    }
-
-    public GlobalExceptionHandler() {
-    }
-
-    @ExceptionHandler({RuntimeException.class})
+    /**
+     * 运行时异常
+     *
+     * @param ex 异常类型
+     * @return 结果
+     */
+    @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public DataResult<String> runtimeExceptionHandler(RuntimeException ex) {
-        return this.result(ErrorCode.RUNTIME_EXCEPTION.getCode(), (Exception)ex);
+        return result(ErrorCode.RUNTIME_EXCEPTION.getCode(), ex);
     }
 
-    @ExceptionHandler({NullPointerException.class})
+    /**
+     * 空指针异常
+     *
+     * @param ex 空指针异常
+     * @return 结果
+     */
+    @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public DataResult<String> nullPointerExceptionHandler(NullPointerException ex) {
-        return this.result(ErrorCode.NULL_POINTER_EXCEPTION.getCode(), (Exception)ex);
+        return result(ErrorCode.NULL_POINTER_EXCEPTION.getCode(), ex);
     }
 
-    @ExceptionHandler({ClassCastException.class})
+    /**
+     *
+     *
+     * @param ex 类型转换异常
+     * @return 结果
+     */
+    @ExceptionHandler(ClassCastException.class)
     @ResponseBody
     public DataResult<String> classCastExceptionHandler(ClassCastException ex) {
-        return this.result(ErrorCode.CLASS_CAST_EXCEPTION.getCode(), (Exception)ex);
+        return result(ErrorCode.CLASS_CAST_EXCEPTION.getCode(), ex);
     }
 
-    @ExceptionHandler({IOException.class})
+    /**
+     *
+     *
+     * @param ex IO异常
+     * @return 结果
+     */
+    @ExceptionHandler(IOException.class)
     @ResponseBody
     public DataResult<String> ioExceptionHandler(IOException ex) {
-        return this.result(ErrorCode.IO_EXCEPTION.getCode(), (Exception)ex);
+        return result(ErrorCode.IO_EXCEPTION.getCode(), ex);
     }
 
-    @ExceptionHandler({NoSuchMethodException.class})
+    /**
+     *
+     *
+     * @param ex 未知方法异常
+     * @return 结果
+     */
+    @ExceptionHandler(NoSuchMethodException.class)
     @ResponseBody
     public DataResult<String> noSuchMethodExceptionHandler(NoSuchMethodException ex) {
-        return this.result(ErrorCode.NO_SUCH_METHOD_EXCEPTION.getCode(), (Exception)ex);
+        return result(ErrorCode.NO_SUCH_METHOD_EXCEPTION.getCode(), ex);
     }
 
-    @ExceptionHandler({IndexOutOfBoundsException.class})
+    /**
+     *
+     *
+     * @param ex 数组越界异常
+     * @return 结果
+     */
+    @ExceptionHandler(IndexOutOfBoundsException.class)
     @ResponseBody
     public DataResult<String> indexOutOfBoundsExceptionHandler(IndexOutOfBoundsException ex) {
-        return this.result(ErrorCode.INDEX_OUT_OF_BOUNDS_EXCEPTION.getCode(), (Exception)ex);
+        return result(ErrorCode.INDEX_OUT_OF_BOUNDS_EXCEPTION.getCode(), ex);
     }
 
-    @ExceptionHandler({ConnectException.class})
+    /**
+     *
+     *
+     * @param ex 网络异常
+     * @return 结果
+     */
+    @ExceptionHandler(ConnectException.class)
     @ResponseBody
     public DataResult<String> connectException(ConnectException ex) {
-        return this.result(ErrorCode.CONNECT_EXCEPTION.getCode(), (Exception)ex);
+        return result(ErrorCode.CONNECT_EXCEPTION.getCode(), ex);
     }
 
+    /**
+     * 4
+     *
+     * @param ex 400错误
+     * @return 结果
+     */
     @ExceptionHandler({HttpMessageNotReadableException.class})
     @ResponseBody
     public DataResult<String> requestNotReadable(HttpMessageNotReadableException ex) {
-        return this.result(ErrorCode.BAD_REQUEST.getCode(), (Exception)ex);
+        return result(ErrorCode.BAD_REQUEST.getCode(), ex);
     }
 
+    /**
+     *
+     *
+     * @param ex 400错误
+     * @return 结果
+     */
     @ExceptionHandler({TypeMismatchException.class})
     @ResponseBody
     public DataResult<String> requestTypeMismatch(TypeMismatchException ex) {
-        return this.result(ErrorCode.BAD_REQUEST.getCode(), (Exception)ex);
+        return result(ErrorCode.BAD_REQUEST.getCode(), ex);
     }
 
+    /**
+     *
+     *
+     * @param ex 400错误
+     * @return 结果
+     */
     @ExceptionHandler({MissingServletRequestParameterException.class})
     @ResponseBody
     public DataResult<String> requestMissingServletRequest(MissingServletRequestParameterException ex) {
-        return this.result(ErrorCode.BAD_REQUEST.getCode(), (Exception)ex);
+        return result(ErrorCode.BAD_REQUEST.getCode(), ex);
     }
 
     @ExceptionHandler({ServletException.class})
     @ResponseBody
     public DataResult<String> http404(ServletException ex) {
-        return this.result(ErrorCode.NOT_FOUND_REQUEST.getCode(), (Exception)ex);
+        return result(ErrorCode.NOT_FOUND_REQUEST.getCode(), ex);
     }
 
+    /**
+     *
+     *
+     * @param ex 405错误
+     * @return 结果
+     */
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     @ResponseBody
     public DataResult<String> request405(HttpRequestMethodNotSupportedException ex) {
-        return this.result(ErrorCode.METHOD_NOT_ALLOWED.getCode(), (Exception)ex);
+        return result(ErrorCode.METHOD_NOT_ALLOWED.getCode(), ex);
     }
 
+    /**
+     *
+     *
+     * @param ex 406错误
+     * @return 结果
+     */
     @ExceptionHandler({HttpMediaTypeNotAcceptableException.class})
     @ResponseBody
     public DataResult<String> request406(HttpMediaTypeNotAcceptableException ex) {
-        return this.result(ErrorCode.NOT_ACCEPTABLE.getCode(), (Exception)ex);
+        return result(ErrorCode.NOT_ACCEPTABLE.getCode(), ex);
     }
 
+    /**
+     *
+     *
+     * @param runtimeException 500错误
+     * @return 结果
+     */
     @ExceptionHandler({ConversionNotSupportedException.class, HttpMessageNotWritableException.class})
     @ResponseBody
     public DataResult<String> server500(RuntimeException runtimeException) {
-        return this.result(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), (Exception)runtimeException);
+        return result(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), runtimeException);
     }
 
+    /**
+     *
+     *
+     * @param globalException GlobalException 业务异常
+     * @return 结果
+     */
     @ExceptionHandler({GlobalException.class})
     @ResponseBody
-    public DataResult<String> appWebException(GlobalException bizRuntimeException) {
-        return this.result(bizRuntimeException.getCode(), bizRuntimeException);
+    public DataResult<String> appWebException(GlobalException globalException) {
+        return result(globalException.getCode(), globalException);
     }
+
 
     @ExceptionHandler({JsonMappingException.class})
     @ResponseBody
     public DataResult<String> jsonMappingException(JsonMappingException jsonMappingException) {
-        return this.result(ErrorCode.ERROR_FORMAT_PARAMETER.getCode(), (Exception)jsonMappingException);
+        return result(ErrorCode.ERROR_FORMAT_PARAMETER.getCode(), jsonMappingException);
     }
 
+    /**
+     *
+     *
+     * @param errCode 错误码
+     * @param e  GlobalException
+     * @return 结果
+     */
     private DataResult<String> result(int errCode, GlobalException e) {
         log.error(e.getMessage(), e);
-        String localValue = String.valueOf(errCode);
-        return !StringUtils.isEmpty(localValue) ? (new DataResult()).fail(errCode, localValue, e.getMessage()) : (new DataResult()).fail(errCode, e.getError(), e.getMessage());
+        String localValue = localeUtil.getMessage(String.valueOf(errCode));
+        if (!StringUtils.isEmpty(localValue)) {
+            return new DataResult<String>().fail(errCode, localValue, e.getMessage());
+        } else {
+            return new DataResult<String>().fail(errCode, e.getError(), e.getMessage());
+        }
     }
 
     private DataResult<String> result(int errCode, Exception e) {
         log.error(e.getMessage(), e);
-        return (new DataResult()).fail(errCode, String.valueOf(errCode), e.getMessage());
+        return new DataResult<String>().fail(errCode, localeUtil.getMessage(String.valueOf(errCode)), e.getMessage());
     }
 
 
