@@ -13,6 +13,6 @@ public @interface GeneratorTable {
 
     String name() ;
     boolean isCondition() default true;
-    int compareType() default 0;//0:等于 ，1:大于等于，2:大于，-1:小于等于，-2:小于
+    int compareType() default 0;//0:等于 ，1:大于等于，2:大于，-1:小于等于，-2:小于,   模糊匹配  5: like %xxx,4: like %xxx% ,3: like xxx%
 
 }
