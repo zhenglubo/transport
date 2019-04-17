@@ -1,7 +1,10 @@
 package com.transport.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.transport.common.result.DataResult;
 import com.transport.domain.Route;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.transport.dto.RouteListQueryDto;
 
 /**
  * <p>
@@ -13,4 +16,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IRouteService extends IService<Route> {
 
+    /**
+     * 分页查询
+     * @param dto 查询条件dto
+     * @return 结果集
+     */
+    DataResult<IPage<Route>> listSearch(RouteListQueryDto dto);
 }

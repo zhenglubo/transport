@@ -10,15 +10,15 @@
         <result column="start_city" property="startCity" />
         <result column="start_county" property="startCounty" />
         <result column="start_town" property="startTown" />
-        <result column="destiniton_province" property="destinitonProvince" />
-        <result column="destiniton_city" property="destinitonCity" />
-        <result column="destiniton_county" property="destinitonCounty" />
-        <result column="destiniton_town" property="destinitonTown" />
+        <result column="destination_province" property="destinationProvince" />
+        <result column="destination_city" property="destinationCity" />
+        <result column="destination_county" property="destinationCounty" />
+        <result column="destination_town" property="destinationTown" />
         <result column="begin_sender_date" property="beginSenderDate" />
         <result column="end_sender_date" property="endSenderDate" />
         <result column="holiday_description" property="holidayDescription" />
         <result column="send_period" property="sendPeriod" />
-        <result column="expected_da" property="expectedDa" />
+        <result column="expected_date" property="expectedDate" />
         <result column="data_change_create_time" property="dataChangeCreateTime" />
         <result column="data_change_last_time" property="dataChangeLastTime" />
     </resultMap>

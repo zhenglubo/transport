@@ -29,6 +29,9 @@ public class TransportCompany extends Model {
     @ApiModelProperty(value = "主键ID")
     private Long id;
 
+    @ApiModelProperty(value = "物流公司ID")
+    private Long transportCompanyId;
+
     @ApiModelProperty(value = "公司名称")
     private String companyName;
 

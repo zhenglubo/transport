@@ -45,16 +45,16 @@ public class Route extends Model {
     private String startTown;
 
     @ApiModelProperty(value = "到达省份")
-    private String destinitonProvince;
+    private String destinationProvince;
 
     @ApiModelProperty(value = "到达城市")
-    private String destinitonCity;
+    private String destinationCity;
 
     @ApiModelProperty(value = "到达县(区)")
-    private String destinitonCounty;
+    private String destinationCounty;
 
     @ApiModelProperty(value = "到达乡镇(详细地址)")
-    private String destinitonTown;
+    private String destinationTown;
 
     @ApiModelProperty(value = "开始发货日期")
     private LocalDate beginSenderDate;
@@ -69,7 +69,7 @@ public class Route extends Model {
     private Integer sendPeriod;
 
     @ApiModelProperty(value = "预计在途时间")
-    private Integer expectedDa;
+    private Integer expectedDate;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime dataChangeCreateTime;
