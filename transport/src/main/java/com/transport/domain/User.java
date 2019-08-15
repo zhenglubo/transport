@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author zhenglb
- * @since 2019-04-01
+ * @since 2019-04-15
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -28,14 +28,26 @@ public class User extends Model {
     @ApiModelProperty(value = "主键ID")
     private Long id;
 
-    @ApiModelProperty(value = "用户名",position = 1)
+    @ApiModelProperty(value = "物流公司ID")
+    private Long transportCompanyId;
+
+    @ApiModelProperty(value = "用户名")
     private String username;
 
-    @ApiModelProperty(value = "密码",position = 2)
+    @ApiModelProperty(value = "密码")
     private String password;
 
-    @ApiModelProperty(value = "联系电话",position = 3)
+    @ApiModelProperty(value = "姓名")
+    private String realName;
+
+    @ApiModelProperty(value = "联系电话")
     private String contactPhone;
+
+    @ApiModelProperty(value = "用户角色")
+    private Long userRoleId;
+
+    @ApiModelProperty(value = "用户状态(1有效 2失效)")
+    private Boolean userState;
 
 
 }

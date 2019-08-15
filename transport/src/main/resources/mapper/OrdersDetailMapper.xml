@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.transport.mapper.OrdersDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.transport.domain.OrdersDetail">
+    <result column="id" property="id" />
+        <result column="order_id" property="orderId" />
+        <result column="transport_type" property="transportType" />
+        <result column="order_status" property="orderStatus" />
+        <result column="transport_fee_pay_type" property="transportFeePayType" />
+        <result column="transport_fee" property="transportFee" />
+        <result column="receiver_id" property="receiverId" />
+        <result column="packages_number" property="packagesNumber" />
+        <result column="is_pack" property="isPack" />
+        <result column="pack_fee" property="packFee" />
+        <result column="settle_status" property="settleStatus" />
+        <result column="is_insurance" property="isInsurance" />
+        <result column="insurance_fee" property="insuranceFee" />
+        <result column="sender_id" property="senderId" />
+        <result column="send_date" property="sendDate" />
+        <result column="recive_date" property="reciveDate" />
+        <result column="damage_state" property="damageState" />
+        <result column="transport_company_id" property="transportCompanyId" />
+        <result column="data_change_create_time" property="dataChangeCreateTime" />
+        <result column="data_change_last_time" property="dataChangeLastTime" />
+    </resultMap>
+
+</mapper>

@@ -77,6 +77,15 @@ public class DMLSQLWrapper<T> {
     private static <T> void setCompareType(UpdateWrapper<T> wrapper, GeneratorTable annotation, Object value) {
         String columnName = annotation.name();
         switch (annotation.compareType()) {
+            case 5://模糊右匹配 like %xxx
+                wrapper.likeRight(columnName, value);
+                break;
+            case 4://模糊匹配 like %xxx%
+                wrapper.like(columnName, value);
+                break;
+            case 3://模糊左匹配 like xxx%
+                wrapper.likeLeft(columnName, value);
+                break;
             case 1://大于等于
                 wrapper.ge(true, columnName, value);
                 break;
@@ -90,14 +99,23 @@ public class DMLSQLWrapper<T> {
                 wrapper.le(false, columnName, value);
                 break;
             case 0:
-                default:wrapper.eq(columnName, value);
+            default:
+                wrapper.eq(columnName, value);
         }
     }
 
     private static <T> void setCompareType(QueryWrapper<T> wrapper, GeneratorTable annotation, Object value) {
         String columnName = annotation.name();
         switch (annotation.compareType()) {
-
+            case 5://模糊右匹配 like %xxx
+                wrapper.likeRight(columnName, value);
+                break;
+            case 4://模糊匹配 like %xxx%
+                wrapper.like(columnName, value);
+                break;
+            case 3://模糊左匹配 like xxx%
+                wrapper.likeLeft(columnName, value);
+                break;
             case 1://大于等于
                 wrapper.ge(true, columnName, value);
                 break;
@@ -111,7 +129,8 @@ public class DMLSQLWrapper<T> {
                 wrapper.le(false, columnName, value);
                 break;
             case 0://等于，默认
-                default:wrapper.eq(columnName, value);
+            default:
+                wrapper.eq(columnName, value);
         }
     }
 }

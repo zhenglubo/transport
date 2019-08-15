@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * Created by zlb on 2019.04.02.
+ *
+ * @author zlb
+ * @date 2019.04.02
  */
 @Data
 @ApiModel("分页查询Dto")

@@ -3,9 +3,9 @@ package com.transport.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.transport.common.result.DataResult;
-import com.transport.domain.User;
-import com.transport.dto.UserListQueryDto;
-import com.transport.service.IUserService;
+import com.transport.domain.Route;
+import com.transport.dto.RouteListQueryDto;
+import com.transport.service.IRouteService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,31 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 物流线路信息 前端控制器
  * </p>
  *
  * @author zhenglb
- * @since 2019-04-15
+ * @since 2019-04-14
  */
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/route")
+public class RouteController {
 
     @Autowired
-    private IUserService userService;
+    private IRouteService routeService;
 
     @ApiOperation(value = "分页查询")
     @PostMapping("/listSearch")
-    public DataResult<IPage<User>> listSearch(@RequestBody UserListQueryDto queryDto){
-        return userService.listSearch(queryDto);
+    public DataResult<IPage<Route>> listSearch(@RequestBody RouteListQueryDto dto){
+        return routeService.listSearch(dto);
     }
-
-    @ApiOperation(value = "修改订单信息")
-    @PostMapping("/insertOrUpdate")
-    public DataResult<Boolean> insertOrUpdate(@RequestBody User user){
-
-        return userService.insertOrUpdate(user);
-    }
-
 }
 
