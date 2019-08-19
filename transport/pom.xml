@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>com.transport</groupId>
 	<artifactId>transport</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<version>1.0</version>
+	<name>application</name>
 	<description>project for Spring Boot</description>
 
 	<properties>
