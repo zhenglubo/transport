@@ -1,5 +1,8 @@
 package com.transport.common.utils;
 
+
+import java.util.concurrent.TimeoutException;
+
 /**
  * @author Administrator
  */
@@ -8,22 +11,22 @@ public class UniqueOderGenerator {
 
 
     private final long workerId;
-    private final long snsEpoch = 1330328109047L;
+    private static final long SNS_EPOCH = 1330328109047L;
     private long sequence = 0L;
-    private final long workerIdBits = 10L;
-    private final long maxWorkerId = -1L ^ -1L << this.workerIdBits;
-    private final long sequenceBits = 12L;
+    private static final long WORKER_ID_BITS = 10L;
+    private static final long MAX_WORKER_ID = -1L ^ -1L << WORKER_ID_BITS;
+    private static final long SEQUENCE_BITS = 12L;
 
-    private final long workerIdShift = this.sequenceBits;
-    private final long timestampLeftShift = this.sequenceBits + this.workerIdBits;
-    private final long sequenceMask = -1L ^ -1L << this.sequenceBits;
+    private static final long WORKER_ID_SHIFT = SEQUENCE_BITS;
+    private static final long TIMESTAMP_LEFT_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS;
+    private static final long SEQUENCE_MASK = -1L ^ -1L << SEQUENCE_BITS;
 
     private long lastTimestamp = -1L;
 
     private UniqueOderGenerator(long workerId) {
         super();
-        if (workerId > this.maxWorkerId || workerId < 0) {
-            throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", this.maxWorkerId));
+        if (workerId > MAX_WORKER_ID || workerId < 0) {
+            throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", MAX_WORKER_ID));
         }
         this.workerId = workerId;
     }
@@ -42,10 +45,10 @@ public class UniqueOderGenerator {
         return uniqueOderGenerator;
     }
 
-    public synchronized String create() throws Exception {
+    public synchronized String create() throws TimeoutException {
         long timestamp = this.timeGen();
         if (this.lastTimestamp == timestamp) {
-            this.sequence = this.sequence + 1 & this.sequenceMask;
+            this.sequence = sequence + 1 & SEQUENCE_MASK;
             if (this.sequence == 0) {
                 timestamp = this.utilNextMillis(this.lastTimestamp);
             }
@@ -53,11 +56,11 @@ public class UniqueOderGenerator {
             this.sequence = 0;
         }
         if (timestamp < this.lastTimestamp) {
-            throw new Exception(String.format("Clock moved backwards.Refusing to generate id for %d milliseconds", (this.lastTimestamp - timestamp)));
+            throw new TimeoutException(String.format("Clock moved backwards.Refusing to generate id for %d milliseconds", (this.lastTimestamp - timestamp)));
         }
 
         this.lastTimestamp = timestamp;
-        long id = timestamp - this.snsEpoch << this.timestampLeftShift | this.workerId << this.workerIdShift | this.sequence;
+        long id = timestamp - SNS_EPOCH << TIMESTAMP_LEFT_SHIFT | this.workerId << WORKER_ID_SHIFT | this.sequence;
         return String.valueOf(id);
     }
 

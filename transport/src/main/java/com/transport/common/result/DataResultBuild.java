@@ -1,13 +1,16 @@
 package com.transport.common.result;
 
+
 /**
  * @description: 结果集封装
  * @author: zhenglubo
  * @create: 2019-03-30 09:55
  **/
 
-public class DataResultBuild<T> {
-    public DataResultBuild() {
+public class DataResultBuild {
+
+    private DataResultBuild() {
+        //
     }
 
     public static <T> DataResult<T> success() {

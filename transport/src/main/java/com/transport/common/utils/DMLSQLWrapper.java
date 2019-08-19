@@ -1,5 +1,7 @@
 package com.transport.common.utils;
 
+
+import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.transport.common.annotation.GeneratorTable;
@@ -74,7 +76,12 @@ public class DMLSQLWrapper<T> {
         return wrapper;
     }
 
-    private static <T> void setCompareType(UpdateWrapper<T> wrapper, GeneratorTable annotation, Object value) {
+    private static <T> void setCompareType(AbstractWrapper wrapper, GeneratorTable annotation, Object value) {
+        if(wrapper instanceof QueryWrapper){
+            wrapper = (QueryWrapper<T>)wrapper;
+        }else {
+            wrapper = (UpdateWrapper<T>)wrapper;
+        }
         String columnName = annotation.name();
         switch (annotation.compareType()) {
             case 5://模糊右匹配 like %xxx
@@ -104,33 +111,4 @@ public class DMLSQLWrapper<T> {
         }
     }
 
-    private static <T> void setCompareType(QueryWrapper<T> wrapper, GeneratorTable annotation, Object value) {
-        String columnName = annotation.name();
-        switch (annotation.compareType()) {
-            case 5://模糊右匹配 like %xxx
-                wrapper.likeRight(columnName, value);
-                break;
-            case 4://模糊匹配 like %xxx%
-                wrapper.like(columnName, value);
-                break;
-            case 3://模糊左匹配 like xxx%
-                wrapper.likeLeft(columnName, value);
-                break;
-            case 1://大于等于
-                wrapper.ge(true, columnName, value);
-                break;
-            case 2://大于
-                wrapper.ge(false, columnName, value);
-                break;
-            case -1://小于等于
-                wrapper.le(true, columnName, value);
-                break;
-            case -2://小于
-                wrapper.le(false, columnName, value);
-                break;
-            case 0://等于，默认
-            default:
-                wrapper.eq(columnName, value);
-        }
-    }
 }

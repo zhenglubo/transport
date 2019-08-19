@@ -32,7 +32,6 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
 
     @Override
     public DataResult<IPage<Customer>> listSearch(CustomerListQueryDto queryDto) {
-        QueryWrapper<Customer> objectQueryWrapper = new QueryWrapper<>();
         QueryWrapper<Customer> queryWrapper = DMLSQLWrapper.queryWrapper(queryDto, Customer.class);
         IPage<Customer> page = customerMapper.selectPage(new Page<>(queryDto.getCurrent(), queryDto.getSize(), true), queryWrapper);
         return CollectionUtils.isEmpty(page.getRecords())? DataResultBuild.fail(" no data"):DataResultBuild.success(page);

@@ -1,6 +1,9 @@
 package com.transport.domain;
 
 import java.math.BigDecimal;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.time.LocalDateTime;
 
@@ -28,6 +31,7 @@ public class TransportOrder extends Model {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键ID")
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "订单号",position = 1)

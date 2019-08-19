@@ -1,5 +1,7 @@
 package com.transport.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -26,13 +28,14 @@ public class Role extends Model {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键ID")
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "物流公司ID")
     private Long transportCompanyId;
 
     @ApiModelProperty(value = "角色名称")
-    private String role;
+    private String roleName;
 
     @ApiModelProperty(value = "角色对应权限ID")
     private Long permissionId;

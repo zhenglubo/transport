@@ -6,7 +6,7 @@
     <resultMap id="BaseResultMap" type="com.transport.domain.Role">
     <result column="id" property="id" />
         <result column="transport_company_id" property="transportCompanyId" />
-        <result column="role" property="role" />
+        <result column="role" property="roleName" />
         <result column="permission_id" property="permissionId" />
         <result column="is_valid" property="isValid" />
         <result column="data_change_create_time" property="dataChangeCreateTime" />

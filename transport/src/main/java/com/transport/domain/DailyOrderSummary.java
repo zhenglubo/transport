@@ -1,12 +1,13 @@
 package com.transport.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -27,6 +28,7 @@ public class DailyOrderSummary extends Model {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键ID")
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "物流公司ID")
